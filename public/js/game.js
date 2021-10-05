@@ -55,6 +55,10 @@ var game = {
         }
     },
     onUpdate: function () {
+
+        if (this.ball == null) { return; }
+        if (this.playerOne == null || this.playerTwo == null) { return; }
+
         this.updateStateOnHit();
     }
 }
