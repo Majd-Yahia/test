@@ -34,7 +34,7 @@
         this.height = window.innerHeight - safetyMargin;
 
         player.onInit(this);
-        ball.onInit(this);
+        ball.onInit(this, player.playerOne, player.playerTwo);
       };
 
       app.onUpdate = function (time) {

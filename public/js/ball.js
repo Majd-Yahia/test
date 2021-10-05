@@ -1,5 +1,3 @@
-import { player } from "./player";
-
 var ball = {
 
     // reference to app.
@@ -46,7 +44,7 @@ var ball = {
         if (this.ball.y < 0) {
             this.ball.dirY = Math.tan(- this.angle) * this.ball.dirX;
         } else if (this.ball.y + this.ball.height > this.app.height) {
-            this.ball.dirY = Math.tan(-angle) * this.ball.dirX;
+            this.ball.dirY = Math.tan(-this.angle) * this.ball.dirX;
         }
     },
     getBallCollision: function (player) {
