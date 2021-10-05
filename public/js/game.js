@@ -4,16 +4,20 @@ var game = {
 
     app: null,
 
+    score: null,
+
     ball: null,
 
     playerOne: null,
     playerTwo: null,
 
-    onInit: function (app, ball) {
+    onInit: function (app, ball, score) {
 
         this.app = app;
 
         this.ball = ball;
+
+        this.score = score;
 
         this.playerOne = ball.playerOne;
         this.playerTwo = ball.playerTwo;
@@ -43,16 +47,34 @@ var game = {
             return 2;           // return 2 if player two scored.
         }
     },
+    gameWon: function (player) {
+        if (player.score >= this.stats.maxScore) {
+            this.stats.end = true;
+            console.log("Game Ended");
+        }
+    },
+    updateScore: function (player) {
+        player.score += 1;
+        this.gameWon(player);
+    },
+    updateScoreText: function () {
+        let score = this.playerOne.score + " - " + this.playerTwo.score;
+        this.score.updateText(0, score);
+    },
     updateStateOnHit: function () {
         let hit = this.getBallHit();
         switch (hit) {
             case 1:
                 console.log("Player one scored");
                 this.ball.resetBall();
+                this.updateScore(this.playerOne);
+                this.updateScoreText();
                 break;
             case 2:
                 console.log("Player two scored.");
                 this.ball.resetBall();
+                this.updateScore(this.playerTwo);
+                this.updateScoreText();
                 break;
             default:
                 break;
