@@ -48,9 +48,11 @@ var game = {
         switch (hit) {
             case 1:
                 console.log("Player one scored");
+                this.ball.resetBall();
                 break;
             case 2:
                 console.log("Player two scored.");
+                this.ball.resetBall();
                 break;
             default:
                 break;
