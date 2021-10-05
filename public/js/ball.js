@@ -4,7 +4,7 @@ var ball = {
     app: null,
 
     // reference to helping variables.
-    ball: null,
+    stats: null,
     angle: null,
 
     // reference to players.
@@ -15,7 +15,7 @@ var ball = {
         this.app = app;
 
         // initialize ball.
-        this.ball = this.initialize();
+        this.stats = this.initialize();
 
         // initialize players.
         this.playerOne = playerOne;
@@ -23,7 +23,7 @@ var ball = {
 
     },
     initialize: function () {
-        let ball = {
+        let stats = {
             id: "ball",
             x: app.width / 2,
             y: app.height / 2,
@@ -36,43 +36,43 @@ var ball = {
             speed: 4,
         };
 
-        this.app.nodes.push(ball);
+        this.app.nodes.push(stats);
 
-        return ball;
+        return stats;
     },
     keepBallInBounds: function () {
-        if (this.ball.y < 0) {
-            this.ball.dirY = Math.tan(- this.angle) * this.ball.dirX;
-        } else if (this.ball.y + this.ball.height > this.app.height) {
-            this.ball.dirY = Math.tan(-this.angle) * this.ball.dirX;
+        if (this.stats.y < 0) {
+            this.stats.dirY = Math.tan(- this.angle) * this.stats.dirX;
+        } else if (this.stats.y + this.stats.height > this.app.height) {
+            this.stats.dirY = Math.tan(-this.angle) * this.stats.dirX;
         }
     },
     getBallCollision: function (player) {
         return (
-            this.ball.x < player.x + player.width &&
-            this.ball.x + this.ball.width > player.x &&
-            this.ball.y < player.y + player.height &&
-            this.ball.y + this.ball.height > player.y
+            this.stats.x < player.x + player.width &&
+            this.stats.x + this.stats.width > player.x &&
+            this.stats.y < player.y + player.height &&
+            this.stats.y + this.stats.height > player.y
         );
     },
     bounceBallOffRacket: function () {
         if (this.getBallCollision(this.playerOne)) {
-            this.ball.dirY = Math.tan(this.angle) * this.ball.dirX;
-            this.ball.dirX = - this.ball.dirX;
+            this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
+            this.stats.dirX = - this.stats.dirX;
         } else if (this.getBallCollision(this.playerTwo)) {
-            this.ball.dirY = Math.tan(this.angle) * this.ball.dirX;
-            this.ball.dirX = - this.ball.dirX;
+            this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
+            this.stats.dirX = - this.stats.dirX;
         }
     },
     setAngle: function () {
-        this.angle = Math.atan(this.ball.dirY / this.ball.dirX);
+        this.angle = Math.atan(this.stats.dirY / this.stats.dirX);
     },
     moveBall: function () {
-        this.ball.x += this.ball.dirX * this.ball.speed;
-        this.ball.y += this.ball.dirY * this.ball.speed;
+        this.stats.x += this.stats.dirX * this.stats.speed;
+        this.stats.y += this.stats.dirY * this.stats.speed;
     },
     onUpdate: function () {
-        if (this.app == null || this.ball == null) { return; }
+        if (this.app == null || this.stats == null) { return; }
 
         this.setAngle();
         this.keepBallInBounds();
