@@ -31,6 +31,8 @@ var score = {
             this.textArr.push(stats);
             this.app.nodes.push(this.textArr[i]);
         }
+
+        this.stats = this.textArr[0];
     }
 }
 
