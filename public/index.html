@@ -17,6 +17,7 @@
       import { player } from "./js/player.js";
       import { ball } from "./js/ball.js";
       import { game } from "./js/game.js";
+      import { score } from "./js/score.js";
 
       app.onInit = function () {
         const app = this;
@@ -38,9 +39,16 @@
 
         ball.onInit(this, player.playerOne, player.playerTwo);
 
-        console.log(ball);
+        score.onInit(this, [
+          {
+            id: "score",
+            msg: "0 - 0",
+            posX: 10,
+            posY: app.height - 20,
+          },
+        ]);
 
-        game.onInit(this, ball);
+        game.onInit(this, ball, score);
       };
 
       app.onUpdate = function (time) {
