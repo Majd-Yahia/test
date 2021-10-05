@@ -1,3 +1,5 @@
+import { player } from "./player";
+
 var ball = {
 
     // reference to app.
@@ -7,9 +9,20 @@ var ball = {
     ball: null,
     angle: null,
 
-    onInit: function (app) {
+    // reference to players.
+    playerOne: null,
+    playerTwo: null,
+
+    onInit: function (app, playerOne, playerTwo) {
         this.app = app;
+
+        // initialize ball.
         this.ball = this.initialize();
+
+        // initialize players.
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+
     },
     initialize: function () {
         let ball = {
@@ -34,6 +47,25 @@ var ball = {
             this.ball.dirY = Math.tan(- this.angle) * this.ball.dirX;
         } else if (this.ball.y + this.ball.height > this.app.height) {
             this.ball.dirY = Math.tan(-angle) * this.ball.dirX;
+        }
+    },
+    getBallCollision: function (player) {
+        return (
+            this.ball.x < player.x + player.width &&
+            this.ball.x + this.ball.width > player.x &&
+            this.ball.y < player.y + player.height &&
+            this.ball.y + this.ball.height > player.y
+        );
+    },
+    bounceBallOffRacket: function () {
+        if (this.getBallCollision(playerOne)) {
+
+            // change ball direction.
+            this.ball.dirY = Math.tan(this.angle) * this.ball.dirX;
+            this.ball.dirX = - this.ball.dirX;
+        } else if (this.getBallCollision(playerTwo)) {
+            this.ball.dirY = Math.tan(this.angle) * this.ball.dirX;
+            this.ball.dirX = - this.ball.dirX;
         }
     },
     setAngle: function () {
