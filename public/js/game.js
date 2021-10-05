@@ -1,6 +1,6 @@
 var game = {
 
-    status: null,
+    stats: null,
 
     app: null,
 
@@ -18,11 +18,11 @@ var game = {
         this.playerOne = ball.playerOne;
         this.playerTwo = ball.playerTwo;
 
-        this.status = this.initialize();
+        this.stats = this.initialize();
     },
     initialize: function () {
 
-        let status = {
+        let stats = {
             defaultBallSpeed: 3,
             playerOneScore: 0,
             playerTwoScore: 0,
@@ -31,13 +31,15 @@ var game = {
             end: false,
         }
 
-        return status;
+        return stats;
     },
     getBallHit: function () {
+        let ball = this.ball.stats;
+
         // check if ball hit the net or not.
-        if (this.ball.x + this.ball.width > this.app.width) {
+        if (ball.x + ball.width > this.app.width) {
             return 1;           // return 1 if player one scored.
-        } else if (this.ball.x + this.ball.width < 0) {
+        } else if (ball.x + ball.width < 0) {
             return 2;           // return 2 if player two scored.
         }
     },
@@ -55,7 +57,6 @@ var game = {
         }
     },
     onUpdate: function () {
-
         if (this.ball == null) { return; }
         if (this.playerOne == null || this.playerTwo == null) { return; }
 
