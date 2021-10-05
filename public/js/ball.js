@@ -56,10 +56,10 @@ var ball = {
         );
     },
     bounceBallOffRacket: function () {
-        if (this.getBallCollision(playerOne)) {
+        if (this.getBallCollision(this.playerOne)) {
             this.ball.dirY = Math.tan(this.angle) * this.ball.dirX;
             this.ball.dirX = - this.ball.dirX;
-        } else if (this.getBallCollision(playerTwo)) {
+        } else if (this.getBallCollision(this.playerTwo)) {
             this.ball.dirY = Math.tan(this.angle) * this.ball.dirX;
             this.ball.dirX = - this.ball.dirX;
         }
@@ -77,6 +77,7 @@ var ball = {
         this.setAngle();
         this.keepBallInBounds();
         this.moveBall();
+        this.bounceBallOffRacket();
     },
 }
 
