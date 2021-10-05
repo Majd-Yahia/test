@@ -58,3 +58,5 @@ var game = {
         this.updateStateOnHit();
     }
 }
+
+export { game }
