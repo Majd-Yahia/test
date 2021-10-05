@@ -92,7 +92,9 @@ var ball = {
         this.stats.x += this.stats.dirX * this.stats.speed;
         this.stats.y += this.stats.dirY * this.stats.speed;
     },
-    onUpdate: function () {
+    onUpdate: function (game) {
+
+        if (game.end || game.paused) { return; }
         if (this.app == null || this.stats == null) { return; }
 
         this.setAngle();

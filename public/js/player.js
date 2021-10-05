@@ -91,7 +91,9 @@ var player = {
         this.playerOne.y -= this.playerOne.direction * this.playerOne.speed; // Move playerOne horizontally based on the direction * speed.
         this.playerTwo.y -= this.playerTwo.direction * this.playerTwo.speed; // Move playerRwo vertically based on the direction * speed.
     },
-    onUpdate: function () {
+    onUpdate: function (game) {
+
+        if (game.end || game.paused) { return; }
 
         // null safety
         if (this.app == null) { return; }

@@ -100,8 +100,8 @@ var game = {
         if (this.ball == null) { return; }
         if (this.playerOne == null || this.playerTwo == null) { return; }
 
-        player.onUpdate();
-        ball.onUpdate();
+        player.onUpdate(this.stats);
+        ball.onUpdate(this.stats);
 
         this.updateStateOnHit();
     }
