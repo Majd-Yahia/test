@@ -35,25 +35,10 @@
         this.width = window.innerWidth - safetyMargin;
         this.height = window.innerHeight - safetyMargin;
 
-        player.onInit(this);
-
-        ball.onInit(this, player.playerOne, player.playerTwo);
-
-        score.onInit(this, [
-          {
-            id: "score",
-            msg: "0 - 0",
-            posX: 10,
-            posY: app.height - 20,
-          },
-        ]);
-
-        game.onInit(this, ball, score);
+        game.onInit(this);
       };
 
       app.onUpdate = function (time) {
-        player.onUpdate();
-        ball.onUpdate();
         game.onUpdate();
       };
     </script>
