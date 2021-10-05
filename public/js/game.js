@@ -1,3 +1,7 @@
+import { player } from "./player.js";
+import { ball } from "./ball.js";
+import { score } from "./score.js";
+
 var game = {
 
     stats: null,
@@ -11,13 +15,25 @@ var game = {
     playerOne: null,
     playerTwo: null,
 
-    onInit: function (app, ball, score) {
+    onInit: function (app) {
 
         this.app = app;
 
-        this.ball = ball;
+        // Initialize each module.
+        player.onInit(this.app);
+        ball.onInit(this.app, player.playerOne, player.playerTwo);
+        score.onInit(this.app, [
+            {
+                id: "score",
+                msg: "0 - 0",
+                posX: 10,
+                posY: app.height - 20,
+            },
+        ]);
 
+        // Setting up the values in game moduel.
         this.score = score;
+        this.ball = ball;
 
         this.playerOne = ball.playerOne;
         this.playerTwo = ball.playerTwo;
@@ -83,6 +99,9 @@ var game = {
     onUpdate: function () {
         if (this.ball == null) { return; }
         if (this.playerOne == null || this.playerTwo == null) { return; }
+
+        player.onUpdate();
+        ball.onUpdate();
 
         this.updateStateOnHit();
     }
