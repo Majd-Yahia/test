@@ -59,8 +59,6 @@ var ball = {
     },
     bounceBallOffRacket: function () {
         if (this.getBallCollision(playerOne)) {
-
-            // change ball direction.
             this.ball.dirY = Math.tan(this.angle) * this.ball.dirX;
             this.ball.dirX = - this.ball.dirX;
         } else if (this.getBallCollision(playerTwo)) {
