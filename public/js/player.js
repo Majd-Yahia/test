@@ -29,6 +29,7 @@ var player = {
             color: color,
             direction: 0,
             speed: 4,
+            score: 0,
         }
 
         this.app.nodes.push(player);
