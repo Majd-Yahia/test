@@ -43,6 +43,7 @@ var game = {
     initialize: function () {
 
         let stats = {
+            id: "state",
             defaultBallSpeed: 3,
             playerOneScore: 0,
             playerTwoScore: 0,
@@ -50,6 +51,8 @@ var game = {
             paused: true,
             end: false,
         }
+
+        this.app.nodes.push(stats);
 
         return stats;
     },
