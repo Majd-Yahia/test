@@ -86,6 +86,10 @@ var player = {
             player.y = app.height - player.height;
         }
     },
+    movePlayer: function () {
+        this.playerOne.y -= this.playerOne.direction * this.playerOne.speed; // Move playerOne horizontally based on the direction * speed.
+        this.playerTwo.y -= this.playerTwo.direction * this.playerTwo.speed; // Move playerRwo vertically based on the direction * speed.
+    },
     onUpdate: function () {
 
         // null safety
@@ -94,6 +98,7 @@ var player = {
 
         this.KeepPlayerInBounds(this.playerOne);
         this.KeepPlayerInBounds(this.playerTwo);
+        this.movePlayer();
     },
 }
 
