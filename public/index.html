@@ -16,6 +16,7 @@
 
       import { player } from "./js/player.js";
       import { ball } from "./js/ball.js";
+      import { game } from "./js/game.js";
 
       app.onInit = function () {
         const app = this;
@@ -34,12 +35,18 @@
         this.height = window.innerHeight - safetyMargin;
 
         player.onInit(this);
+
         ball.onInit(this, player.playerOne, player.playerTwo);
+
+        console.log(ball);
+
+        game.onInit(this, ball);
       };
 
       app.onUpdate = function (time) {
         player.onUpdate();
         ball.onUpdate();
+        game.onUpdate();
       };
     </script>
   </body>
