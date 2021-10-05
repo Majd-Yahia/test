@@ -67,6 +67,27 @@ var ball = {
     setAngle: function () {
         this.angle = Math.atan(this.stats.dirY / this.stats.dirX);
     },
+    resetBall: function () {
+        this.stats.x = this.app.width / 2;
+        this.stats.y = this.app.height / 2;
+
+
+        // Get random integer in x direction.
+        this.stats.dirX = this.getInteger(this.getRandomValueInRange(-1, 1));
+
+        // Get random float value in y direction.
+        this.stats.dirY = this.getRandomValueInRange(-1, 1);
+
+        console.log(this.stats);
+    },
+    getInteger: function (value) {
+        let newValue = Math.floor(value)
+        if (newValue == 0) { newValue = 1; }
+        return newValue;
+    },
+    getRandomValueInRange: function (max, min) {
+        return Math.random() * (max - min) + min;
+    },
     moveBall: function () {
         this.stats.x += this.stats.dirX * this.stats.speed;
         this.stats.y += this.stats.dirY * this.stats.speed;
