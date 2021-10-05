@@ -4,30 +4,34 @@ var score = {
 
     stats: null,
 
-    textArr: null,
+    textArr: [],
 
-    onInit: function (app, texts) {
+    onInit: function (app, array) {
         this.app = app;
 
-        this.textArr = texts;
-
-        this.stats = this.initialize();
+        this.stats = this.initialize(array);
     },
-    initialize: function () {
-        for (let i = 0; i < this.textArr.length; i++) {
-            let values = this.textArr[i];
+    updateText: function (i, msg) {
+
+        if (this.textArr == null) { return; }
+        if (this.textArr.length == 0) { return; }
+
+        this.textArr[i].text = msg;
+    },
+    initialize: function (array) {
+        for (let i = 0; i < array.length; i++) {
+            let values = array[i];
             let stats = {
                 id: values.id,
                 text: values.msg,
                 x: values.posX,
                 y: values.posY,
             }
-            this.app.nodes.push(stats);
+
+            this.textArr.push(stats);
+            this.app.nodes.push(this.textArr[i]);
         }
-
-        this.stats = this.textArr[0];
-    },
-
+    }
 }
 
 export { score }
