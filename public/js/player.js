@@ -96,8 +96,8 @@ var player = {
         if (this.app == null) { return; }
         if (this.playerOne == null || this.playerTwo == null) { return; }
 
-        this.KeepPlayerInBounds(this.playerOne);
-        this.KeepPlayerInBounds(this.playerTwo);
+        this.keepPlayerInBounds(this.playerOne);
+        this.keepPlayerInBounds(this.playerTwo);
         this.movePlayer();
     },
 }
