@@ -11,8 +11,11 @@
       style="border: 1px solid #d3d3d3"
     ></canvas>
     <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript">
+    <script type="module">
       //Sample functions, remove these functions and design ping-pong game with onInit and onUpdate.
+
+      import { player } from "./js/player.js";
+      import { ball } from "./js/ball.js";
 
       app.onInit = function () {
         const app = this;
@@ -29,9 +32,15 @@
         // Set the width and height of canvas in render.
         this.width = window.innerWidth - safetyMargin;
         this.height = window.innerHeight - safetyMargin;
+
+        player.onInit(this);
+        ball.onInit(this);
       };
 
-      app.onUpdate = function (time) {};
+      app.onUpdate = function (time) {
+        player.onUpdate();
+        ball.onUpdate();
+      };
     </script>
   </body>
 </html>
