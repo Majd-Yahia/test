@@ -24,10 +24,22 @@ var game = {
         ball.onInit(this.app, player.playerOne, player.playerTwo);
         score.onInit(this.app, [
             {
-                id: "score",
+                id: "scoreText",
                 msg: "0 - 0",
                 posX: 10,
                 posY: app.height - 20,
+            },
+            {
+                id: "infoText",
+                msg: "Press space to pause/unpause",
+                posX: 200,
+                posY: 30,
+            },
+            {
+                id: "winText",
+                msg: "",
+                posX: 200,
+                posY: 70,
             },
         ]);
 
