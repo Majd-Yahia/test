@@ -41,7 +41,6 @@ var player = {
         return player;
     },
     keyUp: function () {
-        let ref = this;
         document.addEventListener("keyup", function (e) {
             switch (e.which) {
                 case 83:
@@ -54,7 +53,6 @@ var player = {
                     app.getNode("racketTwo").direction = 0;
                     break;
                 case 40:
-                    ref.playSound();
                     app.getNode("racketTwo").direction = 0;
                     break;
                 default:
