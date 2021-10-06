@@ -13,7 +13,7 @@ var ball = {
     playerOne: null,
     playerTwo: null,
 
-    pickedUp: true,
+    pickedUp: false,
 
     stop: false,
     hit: false,

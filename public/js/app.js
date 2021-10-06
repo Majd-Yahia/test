@@ -41,10 +41,7 @@ var app = {
 			if (node.id.includes('Text')) {
 				this.drawText(node);
 			} else if (node.id.includes('ball')) {
-				this.context.fillStyle = node.color;
-				this.context.beginPath();
-				this.context.arc(node.x, node.y, node.radius, 0, 2 * Math.PI);
-				this.context.fill();
+				this.drawCircle(node);
 			}
 			else {
 				this.context.fillStyle = node.color;
@@ -63,6 +60,12 @@ var app = {
 			}
 		}
 		return { x: null, y: null, width: null, height: null };
+	},
+	drawCircle: function (node) {
+		this.context.fillStyle = node.color;
+		this.context.beginPath();
+		this.context.arc(node.x, node.y, node.radius, 0, 2 * Math.PI);
+		this.context.fill();
 	},
 	drawText: function (node) {
 		this.context.font = "30px Arial";

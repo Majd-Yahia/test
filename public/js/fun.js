@@ -5,8 +5,6 @@ var fun = {
 
     powerUp: null,
 
-    pickedUp: false,
-
     ball: null,
 
     onInit: function (app, ball) {
