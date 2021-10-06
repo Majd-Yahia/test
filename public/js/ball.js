@@ -97,7 +97,7 @@ var ball = {
     bounceBallOffRacket: function () {
         let hit = this.getBallCollision(this.playerOne);
         if (hit) {
-            this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
+            this.stats.dirY = (this.stats.y - this.playerOne.y) / this.playerOne.height;
             this.stats.dirX = - this.stats.dirX;
             this.updateBallLogic(this.playerOne);
         }
@@ -109,7 +109,8 @@ var ball = {
 
         hit = this.getBallCollision(this.playerTwo);
         if (hit) {
-            this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
+
+            this.stats.dirY = (this.stats.y - this.playerTwo.y) / this.playerTwo.height;
             this.stats.dirX = - this.stats.dirX;
             this.updateBallLogic(this.playerTwo);                         // speed up the ball.
         }
