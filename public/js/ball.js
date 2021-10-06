@@ -21,6 +21,8 @@ var ball = {
     currentPlayer: null,
     speed: 0,
 
+    bounceSound: '../resources/PingPong2.mp3',
+
     onInit: function (app, playerOne, playerTwo) {
         this.app = app;
 
@@ -50,20 +52,20 @@ var ball = {
 
         return stats;
     },
-    playSound: function () {
+    playSound: function (sound) {
 
         if (this.stop) { return; }
 
-        var audio = new Audio('../resources/PingPong2.mp3');
+        var audio = new Audio(sound);
         audio.play();
     },
     keepBallInBounds: function () {
         if (this.stats.y < 0) {
             this.stats.dirY = Math.tan(- this.angle) * this.stats.dirX;
-            this.playSound();
+            this.playSound(this.bounceSound);
         } else if (this.stats.y + this.stats.height > this.app.height) {
             this.stats.dirY = Math.tan(-this.angle) * this.stats.dirX;
-            this.playSound();
+            this.playSound(this.bounceSound);
         }
     },
     addSpeed: function () {
@@ -84,9 +86,9 @@ var ball = {
         if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
-            fun.randomColor();              // change color of canvas.
-            this.playSound();               // play sound.
-            this.addSpeed();                // speed up the ball.
+            fun.randomColor();                              // change color of canvas.
+            this.playSound(this.bounceSound);               // play sound.
+            this.addSpeed();                                // speed up the ball.
 
             if (this.pickedUp) {
                 this.currentPlayer = this.playerOne;
@@ -105,9 +107,9 @@ var ball = {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
 
-            fun.randomColor();              // change color of canvas.
-            this.playSound();               // play sound.
-            this.addSpeed();                // speed up the ball.
+            fun.randomColor();                              // change color of canvas.
+            this.playSound(this.bounceSound);               // play sound.
+            this.addSpeed();                                // speed up the ball.
 
             if (this.pickedUp) {
                 this.currentPlayer = this.playerTwo;
