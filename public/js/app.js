@@ -38,13 +38,10 @@ var app = {
 
 		for (var index in this.nodes) {
 			var node = this.nodes[index];
-			if (node.id === 'score') {
+			if (node.id.includes('Text')) {
 				this.drawText(node);
-			} else if (node.id === 'ball') {
-				this.context.fillStyle = node.color;
-				this.context.beginPath();
-				this.context.arc(node.x, node.y, node.radius, 0, 2 * Math.PI);
-				this.context.fill();
+			} else if (node.id.includes('ball')) {
+				this.drawCircle(node);
 			}
 			else {
 				this.context.fillStyle = node.color;
@@ -64,34 +61,36 @@ var app = {
 		}
 		return { x: null, y: null, width: null, height: null };
 	},
+	drawCircle: function (node) {
+		this.context.fillStyle = node.color;
+		this.context.beginPath();
+		this.context.arc(node.x, node.y, node.radius, 0, 2 * Math.PI);
+		this.context.fill();
+	},
 	drawText: function (node) {
 		this.context.font = "30px Arial";
 		this.context.fillText(node.text, node.x, node.y);
 	}, reset: function () {
-		var gameState = this.getNode('gameState');
+		gameState = this.getNode('state');
 		if (gameState == undefined) { return; }
 
-		gameState.playerTwoScore = 0;
-		gameState.playerOneScore = 0;
+		this.getNode('racketOne').score = 0;
+		this.getNode('racketTwo').score = 0;
 
 		gameState.paused = false;
 		gameState.end = false;
-		gameState.reset = false;
 
-		this.getNode('score').x = this.getNode('score').x;
-		this.getNode('score').text = '0 - 0';
+		this.getNode('scoreText').text = '0 - 0';
+		this.getNode('winText').text = "";
 	},
 	pause: function () {
-		var gameState = this.getNode('gameState');
-		if (gameState == undefined) { return; }
+		var state = this.getNode('state');
+		if (state == undefined) { return; }
 
-		if (gameState.end) {
+		if (state.end) {
 			app.reset();
-		} else if (gameState.reset) {
-			gameState.reset = false;
-			gameState.paused = false;
 		} else {
-			gameState.paused = !gameState.paused;
+			state.paused = !state.paused;
 		}
 	},
 
