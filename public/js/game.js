@@ -1,6 +1,7 @@
 import { player } from "./player.js";
 import { ball } from "./ball.js";
 import { score } from "./score.js";
+import { fun } from './fun.js';
 
 var game = {
 
@@ -42,6 +43,8 @@ var game = {
                 posY: 30,
             },
         ]);
+
+        fun.onInit(app, ball);
 
         // Setting up the values in game moduel.
         this.score = score;
@@ -126,6 +129,7 @@ var game = {
 
         player.onUpdate(this.stats);
         ball.onUpdate(this.stats);
+        fun.onUpdate();
 
         this.updateStateOnHit();
     }
