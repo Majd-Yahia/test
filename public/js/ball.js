@@ -1,3 +1,5 @@
+import { fun } from './fun.js';
+
 var ball = {
 
     // reference to app.
@@ -61,6 +63,7 @@ var ball = {
         if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
+            fun.randomColor();
             return;
         }
 
@@ -68,6 +71,7 @@ var ball = {
         if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
+            fun.randomColor();
         }
     },
     setAngle: function () {
