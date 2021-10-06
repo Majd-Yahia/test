@@ -13,6 +13,14 @@ var ball = {
     playerOne: null,
     playerTwo: null,
 
+    pickedUp: true,
+
+    stop: false,
+    hit: false,
+
+    currentPlayer: null,
+    speed: 0,
+
     onInit: function (app, playerOne, playerTwo) {
         this.app = app;
 
@@ -35,7 +43,7 @@ var ball = {
             color: "black",
             dirX: 1,
             dirY: -0.8,
-            speed: 4,
+            speed: 5,
         };
 
         this.app.nodes.push(stats);
@@ -43,6 +51,9 @@ var ball = {
         return stats;
     },
     playSound: function () {
+
+        if (this.stop) { return; }
+
         var audio = new Audio('../resources/PingPong2.mp3');
         audio.play();
     },
@@ -55,22 +66,31 @@ var ball = {
             this.playSound();
         }
     },
-    getBallCollision: function (player) {
+    getBallCollision: function (obj) {
         return (
-            this.stats.x < player.x + player.width &&
-            this.stats.x + this.stats.width > player.x &&
-            this.stats.y < player.y + player.height &&
-            this.stats.y + this.stats.height > player.y
+            this.stats.x < obj.x + obj.width &&
+            this.stats.x + this.stats.width > obj.x &&
+            this.stats.y < obj.y + obj.height &&
+            this.stats.y + this.stats.height > obj.y
         );
     },
     bounceBallOffRacket: function () {
-
         let hit = this.getBallCollision(this.playerOne);
         if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
             fun.randomColor();              // change color of canvas.
             this.playSound();               // play sound.
+
+            if (this.pickedUp) {
+                this.currentPlayer = this.playerOne;
+            }
+
+            this.hit = true;
+        }
+
+        if (this.currentPlayer != null) {
+            this.stickyBall(this.currentPlayer);
             return;
         }
 
@@ -78,12 +98,50 @@ var ball = {
         if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
+
             fun.randomColor();              // change color of canvas.
             this.playSound();               // play sound.
+
+            if (this.pickedUp) {
+                this.currentPlayer = this.playerTwo;
+            }
+            this.hit = true;
         }
+
+        if (this.currentPlayer != null && this.pickedUp) {
+            this.stickyBall(this.currentPlayer);
+        }
+
     },
     setAngle: function () {
         this.angle = Math.atan(this.stats.dirY / this.stats.dirX);
+    },
+    stopBall: function () {
+        this.stop = true;                       // Stop playing sounds.
+        this.speed = this.stats.speed;          // save old speed.
+        this.stats.speed = 0;                   // Set speed to 0.
+    },
+    stickyBall: function (player) {
+
+        this.stats.y = player.y;            // move with player. 
+
+        if (this.stop) { return; }
+        this.stopBall();
+
+        setTimeout(() => {
+            this.releaseBall();
+        }, 2000);
+    },
+    releaseBall: function () {
+
+        this.stats.speed = this.speed;
+        this.stop = false;
+
+        this.currentPlayer = null;
+
+        setTimeout(() => {
+            this.pickedUp = false;
+        }, 500);
     },
     resetBall: function () {
         this.stats.x = this.app.width / 2;
