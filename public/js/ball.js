@@ -21,7 +21,9 @@ var ball = {
     currentPlayer: null,
     speed: 0,
 
-    bounceSound: '../resources/PingPong2.mp3',
+    bounceSound: '../resources/bounce.mp3',
+    winSound: '../resources/win.mp3',
+    pauseSound: '../resources/pause.mp3',
 
     onInit: function (app, playerOne, playerTwo) {
         this.app = app;
@@ -81,20 +83,23 @@ var ball = {
             this.stats.y + this.stats.height > obj.y
         );
     },
+    updateBallLogic: function (player) {
+        fun.randomColor();                              // change color of canvas.
+        this.playSound(this.bounceSound);               // play sound.
+        this.addSpeed();                                // speed up the ball.
+
+        if (this.pickedUp) {
+            this.currentPlayer = player;
+        }
+
+        this.hit = true;
+    },
     bounceBallOffRacket: function () {
         let hit = this.getBallCollision(this.playerOne);
         if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
-            fun.randomColor();                              // change color of canvas.
-            this.playSound(this.bounceSound);               // play sound.
-            this.addSpeed();                                // speed up the ball.
-
-            if (this.pickedUp) {
-                this.currentPlayer = this.playerOne;
-            }
-
-            this.hit = true;
+            this.updateBallLogic(this.playerOne);
         }
 
         if (this.currentPlayer != null) {
@@ -106,18 +111,10 @@ var ball = {
         if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
-
-            fun.randomColor();                              // change color of canvas.
-            this.playSound(this.bounceSound);               // play sound.
-            this.addSpeed();                                // speed up the ball.
-
-            if (this.pickedUp) {
-                this.currentPlayer = this.playerTwo;
-            }
-            this.hit = true;
+            this.updateBallLogic(this.playerTwo);                         // speed up the ball.
         }
 
-        if (this.currentPlayer != null && this.pickedUp) {
+        if (this.currentPlayer != null) {
             this.stickyBall(this.currentPlayer);
         }
 

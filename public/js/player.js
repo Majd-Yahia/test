@@ -18,6 +18,10 @@ var player = {
         this.playerOne = this.playerInitialize("racketOne", 10, this.app.height / 2, 10, 50, "red");
         this.playerTwo = this.playerInitialize("racketTwo", this.app.width - 20, this.app.height / 2, 10, 50, "red");
     },
+    playSound: function () {
+        var audio = new Audio('../resources/pause.mp3');
+        audio.play();
+    },
     playerInitialize: function (name, x, y, width, height, color) {
 
         let player = {
@@ -37,6 +41,7 @@ var player = {
         return player;
     },
     keyUp: function () {
+        let ref = this;
         document.addEventListener("keyup", function (e) {
             switch (e.which) {
                 case 83:
@@ -49,6 +54,7 @@ var player = {
                     app.getNode("racketTwo").direction = 0;
                     break;
                 case 40:
+                    ref.playSound();
                     app.getNode("racketTwo").direction = 0;
                     break;
                 default:
@@ -57,6 +63,7 @@ var player = {
         });
     },
     keyDown: function () {
+        let ref = this;
         document.addEventListener("keydown", function (e) {
             // this returns the document so we need to save variables for access.
             switch (e.which) {
@@ -73,6 +80,7 @@ var player = {
                     app.getNode("racketTwo").direction = -1;
                     break;
                 case 32:
+                    ref.playSound();
                     app.pause();
                     break;
                 default:

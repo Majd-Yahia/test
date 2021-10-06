@@ -104,20 +104,21 @@ var game = {
     setPauseGame: function () {
         this.stats.paused = true;
     },
+    updateValues: function (player) {
+        this.ball.resetBall();
+        this.updateScore(player);
+        this.updateScoreText();
+        this.setPauseGame();
+        this.ball.playSound(this.ball.winSound);
+    },
     updateStateOnHit: function () {
         let hit = this.getBallHit();
         switch (hit) {
             case 1:
-                this.ball.resetBall();
-                this.updateScore(this.playerOne);
-                this.updateScoreText();
-                this.setPauseGame();
+                this.updateValues(this.playerOne);
                 break;
             case 2:
-                this.ball.resetBall();
-                this.updateScore(this.playerTwo);
-                this.updateScoreText();
-                this.setPauseGame();
+                this.updateValues(this.playerTwo);
                 break;
             default:
                 break;
