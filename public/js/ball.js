@@ -56,10 +56,16 @@ var ball = {
         );
     },
     bounceBallOffRacket: function () {
-        if (this.getBallCollision(this.playerOne)) {
+
+        let hit = this.getBallCollision(this.playerOne);
+        if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
-        } else if (this.getBallCollision(this.playerTwo)) {
+            return;
+        }
+
+        hit = this.getBallCollision(this.playerTwo);
+        if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
         }
