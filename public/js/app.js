@@ -77,8 +77,8 @@ var app = {
 		gameState.paused = false;
 		gameState.end = false;
 
-		this.getNode('score').x = this.getNode('score').x;
-		this.getNode('score').text = '0 - 0';
+		this.getNode('scoreText').text = '0 - 0';
+		this.getNode('winText').text = "";
 	},
 	pause: function () {
 		var state = this.getNode('state');

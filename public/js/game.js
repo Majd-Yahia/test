@@ -30,16 +30,16 @@ var game = {
                 posY: app.height - 20,
             },
             {
-                id: "infoText",
-                msg: "Press space to pause/unpause",
-                posX: 200,
-                posY: 30,
-            },
-            {
                 id: "winText",
                 msg: "",
                 posX: 200,
                 posY: 70,
+            },
+            {
+                id: "infoText",
+                msg: "Press space to pause/unpause",
+                posX: 200,
+                posY: 30,
             },
         ]);
 
@@ -81,7 +81,13 @@ var game = {
     gameWon: function (player) {
         if (player.score >= this.stats.maxScore) {
             this.stats.end = true;
-            console.log("Game Ended");
+
+            if (player.id.includes("One")) {
+                this.score.updateText(1, "Player One has won the game!");
+            } else {
+                this.score.updateText(1, "Player Two has won the game!");
+            }
+
         }
     },
     updateScore: function (player) {
