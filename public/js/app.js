@@ -38,9 +38,9 @@ var app = {
 
 		for (var index in this.nodes) {
 			var node = this.nodes[index];
-			if (node.id === 'score') {
+			if (node.id.includes('Text')) {
 				this.drawText(node);
-			} else if (node.id === 'ball') {
+			} else if (node.id.includes('ball')) {
 				this.context.fillStyle = node.color;
 				this.context.beginPath();
 				this.context.arc(node.x, node.y, node.radius, 0, 2 * Math.PI);
