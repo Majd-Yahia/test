@@ -42,11 +42,17 @@ var ball = {
 
         return stats;
     },
+    playSound: function () {
+        var audio = new Audio('../resources/PingPong2.mp3');
+        audio.play();
+    },
     keepBallInBounds: function () {
         if (this.stats.y < 0) {
             this.stats.dirY = Math.tan(- this.angle) * this.stats.dirX;
+            this.playSound();
         } else if (this.stats.y + this.stats.height > this.app.height) {
             this.stats.dirY = Math.tan(-this.angle) * this.stats.dirX;
+            this.playSound();
         }
     },
     getBallCollision: function (player) {
@@ -63,7 +69,8 @@ var ball = {
         if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
-            fun.randomColor();
+            fun.randomColor();              // change color of canvas.
+            this.playSound();               // play sound.
             return;
         }
 
@@ -71,7 +78,8 @@ var ball = {
         if (hit) {
             this.stats.dirY = Math.tan(this.angle) * this.stats.dirX;
             this.stats.dirX = - this.stats.dirX;
-            fun.randomColor();
+            fun.randomColor();              // change color of canvas.
+            this.playSound();               // play sound.
         }
     },
     setAngle: function () {
