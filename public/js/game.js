@@ -80,20 +80,23 @@ var game = {
         let score = this.playerOne.score + " - " + this.playerTwo.score;
         this.score.updateText(0, score);
     },
+    setPauseGame: function () {
+        this.stats.paused = true;
+    },
     updateStateOnHit: function () {
         let hit = this.getBallHit();
         switch (hit) {
             case 1:
-                console.log("Player one scored");
                 this.ball.resetBall();
                 this.updateScore(this.playerOne);
                 this.updateScoreText();
+                this.setPauseGame();
                 break;
             case 2:
-                console.log("Player two scored.");
                 this.ball.resetBall();
                 this.updateScore(this.playerTwo);
                 this.updateScoreText();
+                this.setPauseGame();
                 break;
             default:
                 break;

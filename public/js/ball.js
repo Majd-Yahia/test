@@ -71,14 +71,11 @@ var ball = {
         this.stats.x = this.app.width / 2;
         this.stats.y = this.app.height / 2;
 
-
         // Get random integer in x direction.
         this.stats.dirX = this.getInteger(this.getRandomValueInRange(-1, 1));
 
         // Get random float value in y direction.
         this.stats.dirY = this.getRandomValueInRange(-1, 1);
-
-        console.log(this.stats);
     },
     getInteger: function (value) {
         let newValue = Math.floor(value)
