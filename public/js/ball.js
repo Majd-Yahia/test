@@ -66,6 +66,11 @@ var ball = {
             this.playSound();
         }
     },
+    addSpeed: function () {
+        this.stats.speed += 0.5;
+        this.playerOne.speed += 0.1;
+        this.playerTwo.speed += 0.1;
+    },
     getBallCollision: function (obj) {
         return (
             this.stats.x < obj.x + obj.width &&
@@ -81,6 +86,7 @@ var ball = {
             this.stats.dirX = - this.stats.dirX;
             fun.randomColor();              // change color of canvas.
             this.playSound();               // play sound.
+            this.addSpeed();                // speed up the ball.
 
             if (this.pickedUp) {
                 this.currentPlayer = this.playerOne;
@@ -101,6 +107,7 @@ var ball = {
 
             fun.randomColor();              // change color of canvas.
             this.playSound();               // play sound.
+            this.addSpeed();                // speed up the ball.
 
             if (this.pickedUp) {
                 this.currentPlayer = this.playerTwo;
